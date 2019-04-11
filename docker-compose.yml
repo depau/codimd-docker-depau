@@ -15,13 +15,15 @@ services:
     #  - /tmp:size=256K
     environment:
       - POSTGRES_USER=hackmd
-      - POSTGRES_PASSWORD=hackmdpass
+      - POSTGRES_PASSWORD=DBPWD
       - POSTGRES_DB=hackmd
     volumes:
-      - database:/var/lib/postgresql/data
+      - /srv/docker/volumes/hackmd_pg:/var/lib/postgresql/data
     networks:
       backend:
     restart: always
+    ports:
+      - 5432:5432
 
   # MySQL example
   # Most of the documentation that applies to PostgreSQL applies also to MySQL
@@ -47,13 +49,13 @@ services:
 
   app:
     # Uncomment the following section to build the image yourself:
-    #build:
-    #  context: .
-    #  dockerfile: debian/Dockerfile
-    #  args:
-    #    - "VERSION=master"
-    #    - "CODIMD_REPOSITORY=https://github.com/codimd/server.git"
-    image: quay.io/codimd/server:1.3.2
+   build:
+      context: .
+      dockerfile: debian/Dockerfile
+      args:
+        - "VERSION=DepauMD"
+        - "CODIMD_REPOSITORY=https://git.depau.eu/Depau/HackMD.git"
+    #image: quay.io/codimd/server:1.3.2
     #mem_limit: 256mb         # version 2 only
     #memswap_limit: 512mb     # version 2 only
     #read_only: true          # not supported in swarm mode, enable along with tmpfs
@@ -68,7 +70,7 @@ services:
       # - mysql://hackmd:hackmdpass@database:3306/hackmd
       # - sqlite:///data/sqlite.db (NOT RECOMMENDED)
       # - For details see the official sequelize docs: http://docs.sequelizejs.com/en/v3/
-      - CMD_DB_URL=postgres://hackmd:hackmdpass@database:5432/hackmd
+      - CMD_DB_URL=postgres://hackmd:DBPWD@database:5432/hackmd
     ports:
       # Ports that are published to the outside.
       # The latter port is the port inside the container. It should always stay on 3000
@@ -76,7 +78,7 @@ services:
       # local reverse proxy, you may want to listen on 127.0.0.1.
       # Example:
       # - "127.0.0.1:3000:3000"
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     networks:
       backend:
     restart: always
@@ -89,6 +91,6 @@ networks:
   backend:
 
 # Define named volumes so data stays in place
-volumes:
+#volumes:
   # Volume for PostgreSQL/MySQL database
-  database:
+  #  database:

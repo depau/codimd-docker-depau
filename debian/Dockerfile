@@ -1,8 +1,8 @@
 FROM node:8.15.1
 
 # Build arguments to change source url, branch or tag
-ARG CODIMD_REPOSITORY=https://github.com/codimd/server.git
-ARG VERSION=master
+ARG CODIMD_REPOSITORY=https://git.depau.eu/Depau/HackMD.git
+ARG VERSION=DepauMD
 ARG UID=10000
 
 # Set some default config variables

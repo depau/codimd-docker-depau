@@ -1,10 +1,24 @@
 {
     "production": {
-        "urlAddPort": true,
+        "domain": "notes.depau.eu",
+	"urlAddPort": false,
         "email": true,
+	"allowAnonymous": false,
+	"allowAnonymousEdits": true,
+	"allowFreeURL": true,
+	"defaultPermission": "private",
+	"protocolUseSSL": true,
+	"sessionSecret": "hz3kmBq0iLYBWaPwsRH0227/V1bQRxxfc3D32seDTdruOfNp53b/YXzxUP10WONz3uQ47mV4tRRF2Ji1NASXJMMkmoF9/6SkS3MXGb6JDde0tdHxAGq5X5RuRfeDmO5QLkljFOZWTAdE8ERmtkyvmJtutui9MbHEMBVvId03HrQuMpYq0gIEEuDf6U1gqGclDYQiJMJHYAjRkebCOeHadLb+ipQ2rlwG9KHOPXiD4r/dDDLZdeq4RqMkqE9zs",
+	"allowEmailRegister": false,
+	"csp": {
+		"enable": true,
+		"directives": {},
+		"upgradeInsecureRequests": "auto",
+		"addDefaults": true
+	},
         "db": {
             "username": "hackmd",
-            "password": "hackmdpass",
+            "password": "nzsdkfnfksnqpalapa",
             "database": "hackmd",
             "host": "hackmdPostgres",
             "port": "5432",
